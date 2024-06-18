@@ -1,29 +1,36 @@
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
-import ArticleCard from "./ArticleCard.jsx";
+import ArticleCard from "./articleCard.jsx";
+import { getArticles } from "../utils/api.js";
 
 function ArticlesList() {
+  const [isLoading, setIsLoading] = useState(true);
   const [articles, setArticles] = useState([]);
+
   useEffect(() => {
-    axios
-      .get(`https://nc-northcoders-news-api.onrender.com/api/articles`)
-      .then((response) => {
-        console.log(response.data.articles);
-        if (response.data.articles) {
-          setArticles(response.data.articles);
-        } else {
-          setArticles([]);
-        }
+    getArticles()
+      .then(({ articles }) => {
+        setArticles(articles);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
-        setArticles([]);
+        setIsLoading(false);
       });
   }, []);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <ul className="articles-list">
       {articles.map((article) => (
-        <ArticleCard article={article} key={article.article_id} />
+        <li key={article.article_id}>
+          <Link to={`/articles/${article.article_id}`}>
+            <ArticleCard article={article} />
+          </Link>
+        </li>
       ))}
     </ul>
   );
