@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import ArticleCard from "./ArticleCard.jsx";
+import ArticleCard from "./articleCard.jsx";
+import { getArticles } from "../utils/api.js";
 
 function ArticlesList() {
+  const [isLoading, setIsLoading] = useState(true);
   const [articles, setArticles] = useState([]);
+
   useEffect(() => {
-    axios
-      .get(`https://nc-northcoders-news-api.onrender.com/api/articles`)
-      .then((response) => {
-        console.log(response.data.articles);
-        if (response.data.articles) {
-          setArticles(response.data.articles);
+    getArticles()
+      .then(({ articles }) => {
+        if (articles) {
+          setArticles(articles);
         } else {
           setArticles([]);
         }
@@ -18,8 +18,16 @@ function ArticlesList() {
       .catch((error) => {
         console.log(error);
         setArticles([]);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <ul className="articles-list">
       {articles.map((article) => (

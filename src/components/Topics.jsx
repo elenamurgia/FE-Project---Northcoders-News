@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { NavDropdown } from "react-bootstrap";
+import { getTopics } from "../utils/api";
 
 function Topics({ onSelectTopic }) {
   const [topics, setTopics] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("https://nc-northcoders-news-api.onrender.com/api/topics")
-      .then((response) => {
-        if (response.data.topics) {
-          setTopics(response.data.topics);
+    getTopics()
+      .then(({ topics }) => {
+        if (topics) {
+          setTopics(topics);
         } else {
           setTopics([]);
         }
