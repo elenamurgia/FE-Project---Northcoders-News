@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ArticleCard from "./articleCard.jsx";
 import { getArticles } from "../utils/api.js";
@@ -9,29 +10,27 @@ function ArticlesList() {
   useEffect(() => {
     getArticles()
       .then(({ articles }) => {
-        if (articles) {
-          setArticles(articles);
-        } else {
-          setArticles([]);
-        }
+        setArticles(articles);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
-        setArticles([]);
-      })
-      .finally(() => {
         setIsLoading(false);
       });
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <p>Loading...</p>;
   }
 
   return (
     <ul className="articles-list">
       {articles.map((article) => (
-        <ArticleCard article={article} key={article.article_id} />
+        <li key={article.article_id}>
+          <Link to={`/articles/${article.article_id}`}>
+            <ArticleCard article={article} />
+          </Link>
+        </li>
       ))}
     </ul>
   );
