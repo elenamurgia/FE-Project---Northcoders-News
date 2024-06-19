@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-function CommentsList({ article_id }) {
+function Comments({ article_id }) {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -66,4 +66,4 @@ function CommentsList({ article_id }) {
   );
 }
 
-export default CommentsList;
+export default Comments;

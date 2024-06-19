@@ -5,7 +5,7 @@ import Header from "./components/Header.jsx";
 import NavBar from "./components/NavBar.jsx";
 import ArticlesList from "./components/ArticlesList.jsx";
 import Article from "./components/Article.jsx";
-import CommentsList from "./components/Comments.jsx";
+import Comments from "./components/Comments.jsx";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         <Route path="/articles/:article_id" element={<Article />}></Route>
         <Route
           path="/articles/:article_id/comments"
-          element={<CommentsList />}
+          element={<Comments />}
         ></Route>
       </Routes>
     </>

@@ -21,7 +21,18 @@ function NavBar({ onSelectTopic }) {
         collapseOnSelect
       >
         <Container>
-          <Navbar.Brand href="/">NC News</Navbar.Brand>
+          <Navbar.Brand href="/">Home</Navbar.Brand>
+          <Form className="d-flex">
+            <FormControl
+              type="search"
+              placeholder="Search NC News"
+              className="mr-2"
+              aria-label="Search"
+            />
+            <Button variant="outline-success" type="submit">
+              Search
+            </Button>
+          </Form>
           <Navbar.Toggle aria-controls="navbarNavDropdown" />
           <Navbar.Collapse id="navbarNavDropdown">
             <Nav className="me-auto">
@@ -30,17 +41,6 @@ function NavBar({ onSelectTopic }) {
               </NavDropdown>
               <Nav.Link href="/">Sign in</Nav.Link>
             </Nav>
-            <Form className="d-flex">
-              <FormControl
-                type="search"
-                placeholder="Search NC News"
-                className="mr-2"
-                aria-label="Search"
-              />
-              <Button variant="outline-success" type="submit">
-                Search
-              </Button>
-            </Form>
           </Navbar.Collapse>
         </Container>
       </Navbar>
