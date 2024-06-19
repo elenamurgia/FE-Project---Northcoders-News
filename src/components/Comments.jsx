@@ -27,6 +27,10 @@ function Comments({ article_id }) {
     return <p>Loading...</p>;
   }
 
+  if (comments.length === 0) {
+    return <p>No comments added yet</p>;
+  }
+
   if (error) {
     return <p>{error}</p>;
   }
