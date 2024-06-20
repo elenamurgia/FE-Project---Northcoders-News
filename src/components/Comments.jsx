@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { getCommentsByArticleId } from "../utils/api";
-import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import PostComment from "./PostComment";
+import { Card, ListGroup, Container, Row, Col } from "react-bootstrap";
 
-function CommentsList({ article_id }) {
+function Comments({ username }) {
+  const { article_id } = useParams();
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -18,10 +17,18 @@ function CommentsList({ article_id }) {
         setIsLoading(false);
       })
       .catch((error) => {
+        console.error(
+          "Error fetching comments:",
+          error.response ? error.response.data : error.message
+        );
         setError("Something went wrong, please try again");
         setIsLoading(false);
       });
   }, [article_id]);
+
+  const handleCommentSubmit = (newComment) => {
+    setComments((currentComments) => [newComment, ...currentComments]);
+  };
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -36,6 +43,13 @@ function CommentsList({ article_id }) {
       <Row>
         <Col>
           <h2>Comments</h2>
+          {username && <p>Logged in as: {username}</p>}
+
+          <PostComment
+            article_id={article_id}
+            onCommentSubmit={handleCommentSubmit}
+            username={username}
+          />
           <ListGroup className="comments-by-articleId">
             {comments.map((comment) => {
               const formattedDate = new Date(
@@ -66,4 +80,4 @@ function CommentsList({ article_id }) {
   );
 }
 
-export default CommentsList;
+export default Comments;
