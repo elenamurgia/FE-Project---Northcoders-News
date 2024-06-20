@@ -1,20 +1,22 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getArticleById } from "../utils/api";
+import { getArticleById, updateArticleVotes } from "../utils/api";
 import CommentsList from "./Comments";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 
 function Article() {
   const { article_id } = useParams();
-  const [article, setArticle] = useState(null);
+  const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [articleVotes, setArticleVotes] = useState(0);
 
   useEffect(() => {
     getArticleById(article_id)
       .then(({ article }) => {
         setArticle(article);
+        setArticleVotes(article.votes);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -23,16 +25,24 @@ function Article() {
       });
   }, [article_id]);
 
+  const handleVote = (vote) => {
+    setArticleVotes((currentVotes) => currentVotes + vote);
+    updateArticleVotes(article_id, vote)
+      .then(({ article }) => {
+        setArticleVotes(article.votes);
+      })
+      .catch((err) => {
+        setArticleVotes((currentVotes) => currentVotes - vote);
+        setError("Something went wrong, please try again");
+      });
+  };
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
   if (error) {
     return <p>{error}</p>;
-  }
-
-  if (!article) {
-    return <p>Article not found</p>;
   }
 
   const formattedDate = new Date(article.created_at).toLocaleDateString();
@@ -50,8 +60,12 @@ function Article() {
             alt={`Image for ${article.title}`}
           />
           <Card.Text>{article.body}</Card.Text>
+          <div>
+            <button onClick={() => handleVote(1)}>Vote</button>
+            <button onClick={() => handleVote(-1)}>Unvote</button>
+          </div>
           <Card.Text>
-            Votes: {article.votes} | Topic: {article.topic}
+            Votes: {articleVotes} | Topic: {article.topic}
           </Card.Text>
         </Card.Body>
       </Card>
