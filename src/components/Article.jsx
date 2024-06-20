@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleById, updateArticleVotes } from "../utils/api";
-import CommentsList from "./Comments";
+import Comments from "./Comments";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 
-function Article() {
+function Article({ username }) {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -69,7 +69,7 @@ function Article() {
           </Card.Text>
         </Card.Body>
       </Card>
-      <CommentsList article_id={article_id} />
+      <Comments article_id={article_id} username={username} />
     </Container>
   );
 }

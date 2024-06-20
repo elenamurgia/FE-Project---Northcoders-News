@@ -9,8 +9,11 @@ import {
   Button,
 } from "react-bootstrap";
 import Topics from "./Topics";
+import { useUser } from "../context/UserContext";
 
 function NavBar({ onSelectTopic }) {
+  const { selectedUser } = useUser();
+
   return (
     <>
       <Navbar
@@ -39,7 +42,12 @@ function NavBar({ onSelectTopic }) {
               <NavDropdown title="Topics" id="navbarScrollingDropdown">
                 <Topics onSelectTopic={onSelectTopic} />
               </NavDropdown>
-              <Nav.Link href="/">Sign in</Nav.Link>
+              <Nav.Link href="/users">Users</Nav.Link>
+              {selectedUser && (
+                <Navbar.Text className="ml-auto">
+                  You are logged in as {selectedUser}
+                </Navbar.Text>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
