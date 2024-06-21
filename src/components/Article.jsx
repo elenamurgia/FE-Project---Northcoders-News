@@ -1,29 +1,38 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getArticleById, updateArticleVotes } from "../utils/api";
+import {
+  getArticleById,
+  updateArticleVotes,
+  getArticlesByTopic,
+} from "../utils/api";
 import Comments from "./Comments";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 
 function Article({ username }) {
-  const { article_id } = useParams();
+  const { article_id, topic } = useParams();
   const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [articleVotes, setArticleVotes] = useState(0);
 
   useEffect(() => {
-    getArticleById(article_id)
-      .then(({ article }) => {
-        setArticle(article);
-        setArticleVotes(article.votes);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setError("Something went wrong, please try again");
-        setIsLoading(false);
-      });
-  }, [article_id]);
+    setIs;
+    if (topic) {
+      getArticlesByTopic(topic).then((response) => {});
+    } else {
+      getArticleById(article_id)
+        .then(({ article }) => {
+          setArticle(article);
+          setArticleVotes(article.votes);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setError("Something went wrong, please try again");
+          setIsLoading(false);
+        });
+    }
+  }, [article_id, topic]);
 
   const handleVote = (vote) => {
     setArticleVotes((currentVotes) => currentVotes + vote);
