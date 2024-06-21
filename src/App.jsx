@@ -7,6 +7,7 @@ import ArticlesList from "./components/ArticlesList.jsx";
 import Article from "./components/Article.jsx";
 import Comments from "./components/Comments.jsx";
 import Users from "./components/Users.jsx";
+import Topics from "./components/Topics.jsx";
 import { useUser } from "./context/UserContext.jsx";
 
 function App() {
@@ -27,6 +28,8 @@ function App() {
           path="/articles/:article_id/comments"
           element={<Comments username={selectedUser} />}
         />
+        <Route path="/" element={<Topics />} />
+        <Route path="topics/:topic" element={<ArticlesList />} />
       </Routes>
     </>
   );
