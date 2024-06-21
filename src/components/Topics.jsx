@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
-import { NavDropdown } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { NavDropdown, Container } from "react-bootstrap";
 import { getTopics } from "../utils/api";
 
-function Topics({ onSelectTopic }) {
+function Topics() {
   const [topics, setTopics] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getTopics()
@@ -13,19 +17,32 @@ function Topics({ onSelectTopic }) {
         } else {
           setTopics([]);
         }
+        setIsLoading(false);
       })
       .catch((error) => {
-        console.log(error);
-        setTopics([]);
+        setError("Something went wrong, please try again");
+        setIsLoading(false);
       });
   }, []);
+
+  const handleSelectTopic = (topicSlug) => {
+    navigate(`/topics/${topicSlug}`);
+  };
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return (
     <>
       {topics.map((topic) => (
         <NavDropdown.Item
           key={topic.slug}
-          onClick={() => onSelectTopic(topic.slug)}
+          onClick={() => handleSelectTopic(topic.slug)}
         >
           {topic.slug}
         </NavDropdown.Item>
