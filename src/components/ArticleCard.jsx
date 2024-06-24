@@ -15,16 +15,20 @@ export function ArticleCard({
 
   return (
     <Card className="article-card h-100">
-      <Link to={`/articles/${article_id}`}>
+      <Link
+        to={`/articles/${article_id}`}
+        className="link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover"
+      >
         <Card.Img
           variant="top"
           src={article_img_url}
           alt={`Image for ${title}`}
           style={{ height: "200px", objectFit: "cover" }}
         />
+
         <Card.Body>
           <Card.Title>{title}</Card.Title>
-          <Card.Text>
+          <Card.Text className="text-muted">
             By {author} <br />
             Topic: {topic} | Votes: {votes} | Created on: {formattedDate}
           </Card.Text>

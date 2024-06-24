@@ -19,6 +19,7 @@ function SortArticles() {
     <Dropdown as={ButtonGroup} className="float-end">
       <Button
         variant="secondary"
+        size="sm"
         onClick={() => {
           setIsHidden(!isHidden);
         }}
