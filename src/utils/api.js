@@ -1,13 +1,21 @@
 import axios from "axios";
 
 const articlesApi = axios.create({
-  baseURL: "https://nc-northcoders-news-api.onrender.com/api",
+  baseURL: "https://nc-news-api-t2cr.onrender.com/api",
 });
 
-export const getArticles = () => {
-  return articlesApi.get("/articles").then((res) => {
-    return res.data;
-  });
+export const getArticles = (topic, sortBy, order) => {
+  return articlesApi
+    .get("/articles", {
+      params: {
+        topic,
+        sort_by: sortBy,
+        order,
+      },
+    })
+    .then((res) => {
+      return res.data;
+    });
 };
 
 export const getArticleById = (article_id) => {
@@ -30,7 +38,7 @@ export const getCommentsByArticleId = (article_id) => {
 
 export const updateArticleVotes = (article_id, votesToBeAdded) => {
   return articlesApi
-    .patch(`/articles/${article_id}`, { votesToBeAdded })
+    .patch(`/articles/${article_id}`, { inc_votes: votesToBeAdded })
     .then((res) => {
       return res.data;
     });
@@ -56,12 +64,6 @@ export const getUsers = () => {
 
 export const deleteComment = (comment_id) => {
   return articlesApi.delete(`/comments/${comment_id}`).then((res) => {
-    return res.data;
-  });
-};
-
-export const getArticlesByTopic = (topic) => {
-  return articlesApi.get(`/articles?topic=${topic}`).then((res) => {
     return res.data;
   });
 };
