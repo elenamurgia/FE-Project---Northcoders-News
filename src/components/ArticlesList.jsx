@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getArticles, getArticlesByTopic } from "../utils/api.js";
-import { Row, Container, Col } from "react-bootstrap";
+import { Row, Container, Col, Spinner } from "react-bootstrap";
 import ArticleCard from "./ArticleCard.jsx";
 
 function ArticlesList() {
@@ -39,7 +39,11 @@ function ArticlesList() {
   }, [topic]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <>
+        <Spinner animation="border" variant="secondary" size="sm" />
+      </>
+    );
   }
 
   if (error) {

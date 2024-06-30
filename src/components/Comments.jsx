@@ -65,7 +65,11 @@ function Comments({ username }) {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <>
+        <Spinner animation="border" variant="secondary" size="sm" />
+      </>
+    );
   }
 
   if (error) {

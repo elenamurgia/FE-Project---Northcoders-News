@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleById, updateArticleVotes } from "../utils/api";
 import Comments from "./Comments";
-import Card from "react-bootstrap/Card";
-import Container from "react-bootstrap/Container";
+import { Card, Container, Spinner } from "react-bootstrap";
 
 function Article({ username }) {
   const { article_id } = useParams();
@@ -38,7 +37,11 @@ function Article({ username }) {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <>
+        <Spinner animation="border" variant="secondary" size="sm" />
+      </>
+    );
   }
 
   if (error) {
