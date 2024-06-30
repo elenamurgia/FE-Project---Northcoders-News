@@ -1,42 +1,37 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getArticles, getArticlesByTopic } from "../utils/api.js";
+import { useParams, useSearchParams, useNavigate } from "react-router-dom";
+import { getArticles } from "../utils/api.js";
 import { Row, Container, Col, Spinner } from "react-bootstrap";
 import ArticleCard from "./ArticleCard.jsx";
+import SortArticles from "./SortArticles.jsx";
 
 function ArticlesList() {
   const { topic } = useParams();
+  const navigate = useNavigate();
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchParams] = useSearchParams();
+  const sortBy = searchParams.get("sort_by");
+  const order = searchParams.get("order");
 
   useEffect(() => {
-    if (topic) {
-      getArticlesByTopic(topic)
-        .then((articlesData) => {
-          if (articlesData.articles.length === 0) {
-            setError("No articles found for this topic");
-          } else {
-            setArticles(articlesData.articles);
-            setIsLoading(false);
-          }
-        })
-        .catch((error) => {
-          setError("Something went wrong, please try again");
-          setIsLoading(false);
-        });
-    } else {
-      getArticles()
-        .then((response) => {
+    setIsLoading(true);
+    getArticles(topic, sortBy, order)
+      .then((response) => {
+        if (response.articles.length === 0) {
+          setError("No articles found for this topic");
+        } else {
           setArticles(response.articles);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          setError("Something went wrong, please try again");
-          setIsLoading(false);
-        });
-    }
-  }, [topic]);
+          setError(null);
+        }
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setError("Something went wrong, please try again");
+        setIsLoading(false);
+      });
+  }, [topic, sortBy, order]);
 
   if (isLoading) {
     return (
@@ -52,7 +47,10 @@ function ArticlesList() {
 
   return (
     <Container>
-      <h2>Articles {topic && `- ${topic}`}</h2>
+      <h2>
+        Articles {topic && `- ${topic}`} <SortArticles />
+      </h2>
+
       <Row>
         {articles.map((article) => (
           <Col key={article.article_id} md={4} className="g-3">

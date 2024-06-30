@@ -17,6 +17,7 @@ function NavBar({ onSelectTopic }) {
   return (
     <>
       <Navbar
+        className="mb-2"
         expand="X1"
         bg="dark"
         variant="dark"
@@ -28,11 +29,11 @@ function NavBar({ onSelectTopic }) {
           <Form className="d-flex">
             <FormControl
               type="search"
-              placeholder="Search NC News"
+              placeholder="Search NC News..."
               className="mr-2"
               aria-label="Search"
             />
-            <Button variant="outline-success" type="submit">
+            <Button variant="outline-secondary" type="submit">
               Search
             </Button>
           </Form>
