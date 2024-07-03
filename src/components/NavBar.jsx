@@ -24,7 +24,7 @@ function NavBar({ onSelectTopic }) {
         fixed="auto"
         collapseOnSelect
       >
-        <Container>
+        <Container style={{ backgroundColor: "#030637" }}>
           <Navbar.Brand href="/">Home</Navbar.Brand>
           <Form className="d-flex">
             <FormControl

@@ -2,6 +2,7 @@ body {
   justify-content: center;
   align-items: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #f6f5f2;
 }
 
 @media only screen and (max-width: 480px) {
