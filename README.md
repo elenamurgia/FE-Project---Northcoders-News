@@ -35,6 +35,8 @@ If you want to contribute to this repository, please follow these steps:
 2. Open Terminal and run the following command:
    ```bash
    npm install
+   ```
+   ```bash
    npm run dev
    ```
-   The minimum version of Node.js to run the project is v18.17.1
+3. The minimum version of Node.js to run the project is v18.17.1
