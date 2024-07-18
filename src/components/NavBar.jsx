@@ -24,8 +24,10 @@ function NavBar({ onSelectTopic }) {
         fixed="auto"
         collapseOnSelect
       >
-        <Container style={{ backgroundColor: "#030637" }}>
-          <Navbar.Brand href="/">Home</Navbar.Brand>
+        <Container style={{ backgroundColor: "#012E40" }}>
+          <Navbar.Brand style={{ color: "#F2F2F2" }} href="/">
+            Home
+          </Navbar.Brand>
           <Form className="d-flex">
             <FormControl
               type="search"

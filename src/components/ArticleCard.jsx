@@ -14,7 +14,7 @@ export function ArticleCard({
   const formattedDate = new Date(created_at).toLocaleDateString();
 
   return (
-    <Card className="article-card h-100">
+    <Card className="article-card h-100" style={{ backgroundColor: "#F2F2F2" }}>
       <Link
         to={`/articles/${article_id}`}
         className="link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover"
@@ -27,8 +27,8 @@ export function ArticleCard({
         />
 
         <Card.Body>
-          <Card.Title>{title}</Card.Title>
-          <Card.Text className="text-muted">
+          <Card.Title style={{ color: "#012E40" }}>{title}</Card.Title>
+          <Card.Text style={{ color: "#026773" }}>
             By {author} <br />
             Topic: {topic} | Votes: {votes} | Created on: {formattedDate}
           </Card.Text>

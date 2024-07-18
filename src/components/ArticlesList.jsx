@@ -47,7 +47,7 @@ function ArticlesList() {
 
   return (
     <Container>
-      <h2>
+      <h2 style={{ color: "#024959" }}>
         Articles {topic && `- ${topic}`} <SortArticles />
       </h2>
 

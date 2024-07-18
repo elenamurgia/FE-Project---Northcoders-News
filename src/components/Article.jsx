@@ -38,30 +38,45 @@ function Article({ username }) {
 
   if (isLoading) {
     return (
-      <>
-        <Spinner animation="border" variant="secondary" size="sm" />
-      </>
+      <Container
+        className="d-flex justify-content-center align-items-center"
+        style={{ height: "100vh", color: "#027373" }}
+      >
+        <Spinner animation="border" variant="secondary" />
+      </Container>
     );
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return (
+      <Container
+        className="d-flex justify-content-center align-items-center"
+        style={{ height: "100vh", color: "#027373" }}
+      >
+        <p>{error}</p>
+      </Container>
+    );
   }
 
   const formattedDate = new Date(article.created_at).toLocaleDateString();
 
   return (
     <Container>
-      <Card className="individual-article">
+      <Card
+        className="individual-article"
+        style={{ backgroundColor: "#F2F2F2" }}
+      >
         <Card.Body>
           <Card.Title>{article.title}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
             By {article.author} | {formattedDate}
           </Card.Subtitle>
-          <Card.Img
-            src={article.article_img_url}
-            alt={`Image for ${article.title}`}
-          />
+          {article.article_img_url && (
+            <Card.Img
+              src={article.article_img_url}
+              alt={`Image for ${article.title}`}
+            />
+          )}
           <Card.Text>{article.body}</Card.Text>
           <div>
             <button onClick={() => handleVote(1)}>Vote</button>
