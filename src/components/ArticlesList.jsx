@@ -47,7 +47,7 @@ function ArticlesList() {
 
   return (
     <Container>
-      <h2 style={{ color: "#024959" }}>
+      <h2 style={{ color: "#024959", fontWeight: "bold" }}>
         Articles {topic && `- ${topic}`} <SortArticles />
       </h2>
 
@@ -62,6 +62,7 @@ function ArticlesList() {
               article_img_url={article.article_img_url}
               article_id={article.article_id}
               topic={article.topic}
+              comment_count={article.comment_count}
             />
           </Col>
         ))}

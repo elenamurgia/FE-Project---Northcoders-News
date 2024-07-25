@@ -1,9 +1,7 @@
-import { useState } from "react";
 import { useNavigate, createSearchParams } from "react-router-dom";
 import { ButtonGroup, Dropdown, Button } from "react-bootstrap";
 
 function SortArticles() {
-  const [isHidden, setIsHidden] = useState(true);
   const navigate = useNavigate();
 
   const handleSortClick = (sortBy, order) => {
@@ -20,16 +18,32 @@ function SortArticles() {
       <Button
         variant="secondary"
         size="sm"
-        onClick={() => {
-          setIsHidden(!isHidden);
+        style={{
+          backgroundColor: "#012E40",
+          color: "#F2F2F2",
+          borderColor: "#012E40",
         }}
       >
-        {isHidden ? "Show filters" : "Hide filters"}
+        Show filters
       </Button>
 
-      <Dropdown.Toggle split variant="secondary" id="dropdown-split-basic" />
+      <Dropdown.Toggle
+        split
+        variant="secondary"
+        style={{
+          backgroundColor: "#012E40",
+          color: "#F2F2F2",
+          borderColor: "#012E40",
+        }}
+      />
 
-      <Dropdown.Menu>
+      <Dropdown.Menu
+        style={{
+          backgroundColor: "#F2F2F2",
+          color: "#012E40",
+          borderColor: "#012E40",
+        }}
+      >
         <Dropdown.Item onClick={() => handleSortClick("created_at", "desc")}>
           Newest First
         </Dropdown.Item>

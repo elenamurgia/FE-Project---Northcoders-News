@@ -1,18 +1,16 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
+import { Chat, HandThumbsUp } from "react-bootstrap-icons";
 
-export function ArticleCard({
+function ArticleCard({
   title,
   author,
-  created_at,
   votes,
   article_img_url,
   article_id,
-  topic,
+  comment_count,
 }) {
-  const formattedDate = new Date(created_at).toLocaleDateString();
-
   return (
     <Card className="article-card h-100" style={{ backgroundColor: "#F2F2F2" }}>
       <Link
@@ -25,12 +23,19 @@ export function ArticleCard({
           alt={`Image for ${title}`}
           style={{ height: "200px", objectFit: "cover" }}
         />
-
         <Card.Body>
           <Card.Title style={{ color: "#012E40" }}>{title}</Card.Title>
-          <Card.Text style={{ color: "#026773" }}>
-            By {author} <br />
-            Topic: {topic} | Votes: {votes} | Created on: {formattedDate}
+          <Card.Text style={{ color: "#173540" }}>
+            <span
+              style={{ display: "flex", alignItems: "center", gap: "15px" }}
+            >
+              <span style={{ display: "flex", alignItems: "center" }}>
+                <HandThumbsUp /> {votes}
+              </span>
+              <span style={{ display: "flex", alignItems: "center" }}>
+                <Chat /> {comment_count}
+              </span>
+            </span>
           </Card.Text>
         </Card.Body>
       </Link>

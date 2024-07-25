@@ -36,12 +36,31 @@ export const getCommentsByArticleId = (article_id) => {
   });
 };
 
-export const updateArticleVotes = (article_id, votesToBeAdded) => {
-  return articlesApi
-    .patch(`/articles/${article_id}`, { inc_votes: votesToBeAdded })
-    .then((res) => {
-      return res.data;
-    });
+export const updateArticleVotes = async (article_id, votesToBeAdded) => {
+  try {
+    const payload = { votesToBeAdded };
+    console.log(
+      `Sending PATCH request to /articles/${article_id} with payload:`,
+      payload
+    );
+    const response = await articlesApi.patch(
+      `/articles/${article_id}`,
+      payload,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log("Server response:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error updating article votes:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
 };
 
 export const postComment = (article_id, username, comment) => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { NavDropdown, Container } from "react-bootstrap";
+import { NavDropdown, Spinner, Container } from "react-bootstrap";
 import { getTopics } from "../utils/api";
 
 function Topics() {
@@ -30,18 +30,18 @@ function Topics() {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <>
+        <Spinner animation="border" variant="secondary" size="sm" />
+      </>
+    );
   }
-
-  if (error) {
-    return <p>{error}</p>;
-  }
-
   return (
     <>
       {topics.map((topic) => (
         <NavDropdown.Item
           key={topic.slug}
+          className="custom-dropdown-item"
           onClick={() => handleSelectTopic(topic.slug)}
         >
           {topic.slug}
