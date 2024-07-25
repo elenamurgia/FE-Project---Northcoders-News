@@ -1,3 +1,4 @@
+// Article.jsx
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getArticleById, updateArticleVotes } from "../utils/api";
@@ -11,7 +12,7 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
-import { HandThumbsUp, HandThumbsDown } from "react-bootstrap-icons";
+import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 
 function Article() {
   const { article_id } = useParams();
@@ -27,35 +28,24 @@ function Article() {
 
   useEffect(() => {
     const fetchArticle = async () => {
-      console.log("Fetching article...");
       setIsLoading(true);
       try {
         const response = await getArticleById(article_id);
-        console.log("API Response:", response);
-        console.log("API Response Data:", response.article);
-
         if (response && response.article) {
-          console.log("Article fetched successfully:", response.article);
           setArticle(response.article);
           setArticleVotes(response.article.votes);
           setIsLoading(false);
         } else {
-          console.log(
-            "No article found. Response structure issue. Response:",
-            response
-          );
           setError("No article found.");
           setIsLoading(false);
         }
       } catch (err) {
-        console.error("Error fetching article:", err);
         setError("Something went wrong, please try again.");
         setIsLoading(false);
       }
     };
 
     if (!/^\d+$/.test(article_id)) {
-      console.log("Invalid article ID format, setting error state...");
       setError("Invalid article ID format.");
       setIsLoading(false);
     } else {
@@ -71,16 +61,11 @@ function Article() {
   };
 
   const handleVote = async (vote) => {
-    console.log(`Voting with value: ${vote}`);
-    console.log(`Article ID: ${article_id}`);
-    console.log(`Payload: ${JSON.stringify({ votesToBeAdded: vote })}`);
-
     setArticleVotes((prevVotes) => prevVotes + vote);
     handleUserVotes(vote);
     try {
       await updateArticleVotes(article_id, vote);
     } catch (err) {
-      console.error("Error updating votes:", err.response?.data || err.message);
       setArticleVotes((prevVotes) => prevVotes - vote);
       setError("Something went wrong, please try again");
     }
@@ -150,7 +135,7 @@ function Article() {
                   disabled={!selectedUser || isAddDisabled}
                   onClick={() => handleVote(1)}
                 >
-                  <HandThumbsUp />
+                  <FaThumbsUp />
                 </Button>
               </span>
             </OverlayTrigger>
@@ -161,11 +146,11 @@ function Article() {
             >
               <span>
                 <Button
-                  variant={userVotes < 0 ? "danger" : "outline_danger"}
+                  variant={userVotes < 0 ? "danger" : "outline-danger"}
                   disabled={!selectedUser || isSubtractDisabled}
                   onClick={() => handleVote(-1)}
                 >
-                  <HandThumbsDown />
+                  <FaThumbsDown />
                 </Button>
               </span>
             </OverlayTrigger>

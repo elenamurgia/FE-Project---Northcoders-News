@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
-import { Chat, HandThumbsUp } from "react-bootstrap-icons";
+import { FaRegComments, FaThumbsUp } from "react-icons/fa";
 
 function ArticleCard({
   title,
@@ -30,10 +30,10 @@ function ArticleCard({
               style={{ display: "flex", alignItems: "center", gap: "15px" }}
             >
               <span style={{ display: "flex", alignItems: "center" }}>
-                <HandThumbsUp /> {votes}
+                <FaThumbsUp /> {votes}
               </span>
               <span style={{ display: "flex", alignItems: "center" }}>
-                <Chat /> {comment_count}
+                <FaRegComments /> {comment_count}
               </span>
             </span>
           </Card.Text>
