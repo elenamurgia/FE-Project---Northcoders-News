@@ -7,7 +7,7 @@ body {
 
 .App {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 100%;
   grid-template-rows: min-content auto;
   grid-template-areas:
     "header"
@@ -32,8 +32,8 @@ body {
   background-color: #012e40;
   border: none;
   box-shadow: none;
-  max-width: 1200px;
   margin: 0 auto; 
+  max-width: 1400px;
 }
 
 .custom-dropdown .dropdown-toggle {
@@ -57,34 +57,28 @@ body {
   grid-area: header;
   width: 100%;
   margin: 0 auto;
-  max-width: 1200px; 
-  padding: 0 1rem; 
-  
+  max-width: 1400px; 
 }
 
 .navbar-container {
   grid-area: nav;
   width: 100%;
   margin: 0 auto;
-    max-width: 1200px; 
-  padding: 0 1rem; 
+  max-width: 1400px;
 }
 
 .content-container {
   grid-area: content;
   padding: 1rem;
+  margin-top: 2rem; 
 }
 
 .mt-3 {
   margin-top: 1rem;
 }
 
-@media only screen and (max-width: 370px) {
+@media (max-width: 300px) {
   .header-container .form-control {
-    width: auto;
-  }
-  .header-container .row {
-    margin-right: 0;
-    margin-left: 0;
+    width: 80%; 
   }
 }

@@ -50,7 +50,7 @@ function SearchResults() {
   }
 
   return (
-    <Container fluid className="mt-3">
+    <Container>
       {hasSearched && results.length === 0 ? (
         <p>No results found for "{searchTerm}"</p>
       ) : (
