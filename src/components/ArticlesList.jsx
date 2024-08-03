@@ -46,7 +46,7 @@ function ArticlesList() {
   }
 
   return (
-    <Container>
+    <Container style={{paddingTop: "1rem"}}>
       <h2 style={{ color: "#024959", fontWeight: "bold" }}>
         Articles {topic && `- ${topic}`} <SortArticles />
       </h2>

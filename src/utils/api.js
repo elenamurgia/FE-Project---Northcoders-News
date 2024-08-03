@@ -86,3 +86,10 @@ export const deleteComment = (comment_id) => {
     return res.data;
   });
 };
+
+export const searchArticle = (searchTerm) => {
+  return articlesApi.get(`/articles/search/${searchTerm}`).then((res) => {
+    console.log("API Response:", res.data);
+    return res.data;
+  });
+};

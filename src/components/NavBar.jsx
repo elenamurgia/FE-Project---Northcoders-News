@@ -9,7 +9,7 @@ function NavBar({ onSelectTopic }) {
   return (
     <>
       <Navbar
-        className="navbar-custom mb-2"
+        className="navbar-custom"
         expand="xs"
         collapseOnSelect
         style={{ color: "#F2F2F2" }}
