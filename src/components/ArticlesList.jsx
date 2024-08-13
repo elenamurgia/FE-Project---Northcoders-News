@@ -4,6 +4,7 @@ import { getArticles } from "../utils/api.js";
 import { Row, Container, Col, Spinner } from "react-bootstrap";
 import ArticleCard from "./ArticleCard.jsx";
 import SortArticles from "./SortArticles.jsx";
+import { useMediaQuery } from 'react-responsive';
 
 function ArticlesList() {
   const { topic } = useParams();
@@ -14,6 +15,8 @@ function ArticlesList() {
   const [searchParams] = useSearchParams();
   const sortBy = searchParams.get("sort_by");
   const order = searchParams.get("order");
+
+  const isMobile = useMediaQuery({ query: '(max-width: 600px)' });
 
   useEffect(() => {
     setIsLoading(true);
@@ -45,15 +48,26 @@ function ArticlesList() {
     return <p>{error}</p>;
   }
 
+  
+
   return (
-    <Container style={{paddingTop: "1rem"}}>
-      <h2 style={{ color: "#024959", fontWeight: "bold" }}>
-        Articles {topic && `- ${topic}`} <SortArticles />
-      </h2>
+    <Container style={{paddingTop: '0'}}>
+       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        <h2 style={{ color: "#012E40", fontWeight: "bold", margin: 0 }}>
+          Articles {topic && `- ${topic}`}
+        </h2>
+        <SortArticles />
+      </div>
 
       <Row>
         {articles.map((article) => (
-          <Col key={article.article_id} md={4} className="g-3">
+          <Col 
+            key={article.article_id} 
+            xs={12} 
+            md={4} 
+            className="mb-4"
+            style={{ paddingLeft: isMobile ? '15px' : '', paddingRight: isMobile ? '15px' : '' }}
+          >
             <ArticleCard
               title={article.title}
               author={article.author}

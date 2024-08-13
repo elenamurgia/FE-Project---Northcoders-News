@@ -54,6 +54,10 @@ function SearchResults() {
       {hasSearched && results.length === 0 ? (
         <p>No results found for "{searchTerm}"</p>
       ) : (
+        <>
+        <p>
+          {results.length} {results.length === 1 ? "article" : "articles"} found for "{searchTerm}"
+        </p>
         <Row>
           {results.map((article) => (
             <Col key={article.article_id} md={4} className="mb-4">
@@ -86,6 +90,7 @@ function SearchResults() {
             </Col>
           ))}
         </Row>
+        </>
       )}
     </Container>
   );

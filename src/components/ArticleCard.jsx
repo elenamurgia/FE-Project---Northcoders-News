@@ -2,17 +2,27 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import { FaRegComments, FaThumbsUp } from "react-icons/fa";
+import { useMediaQuery } from 'react-responsive'; 
 
 function ArticleCard({
   title,
-  author,
   votes,
   article_img_url,
   article_id,
   comment_count,
 }) {
+
+  const isMobile = useMediaQuery({ query: '(max-width: 600px)' }); 
+
   return (
-    <Card className="article-card h-100" style={{ backgroundColor: "#F2F2F2" }}>
+     <Card 
+      className="article-card h-100" 
+      style={{ 
+        backgroundColor: "#F2F2F2",
+        width: isMobile ? '100%' : 'auto', 
+        marginBottom: '1rem',
+      }}
+    >
       <Link
         to={`/articles/${article_id}`}
         className="link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover"

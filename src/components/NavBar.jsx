@@ -14,10 +14,10 @@ function NavBar({ onSelectTopic }) {
         collapseOnSelect
         style={{ color: "#F2F2F2" }}
       >
-        <Container style={{ backgroundColor: "#012E40" }}>
+        <Container style={{ backgroundColor: "#012E40", paddingLeft: '0.5rem' }}>
           <Navbar.Toggle
             aria-controls="navbarNavDropdown"
-            style={{ backgroundColor: "#F2F2F2" }}
+            style={{ backgroundColor: "#F2F2F2"}}
           />
           <Navbar.Collapse className="justify-content-end">
             <Nav className="me-auto" style={{ color: "#F2F2F2" }}>
