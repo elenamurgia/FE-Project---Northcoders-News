@@ -1,6 +1,9 @@
-body {
-  margin: 0;
-  padding: 0;
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 0;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   background-color: #f2f2f2 !important;
 }
@@ -10,7 +13,6 @@ body {
   border: none;
   box-shadow: none;
   margin: 0 auto; 
-  max-width: 1400px;
 }
 
 .custom-dropdown .dropdown-toggle {
@@ -34,14 +36,12 @@ body {
   grid-area: header;
   width: 100%;
   margin: 0 auto;
-  max-width: 1400px; 
 }
 
 .navbar-container {
   grid-area: nav;
   width: 100%;
   margin: 0 auto;
-  max-width: 1400px;
 }
 
 .content-container {
@@ -53,3 +53,8 @@ body {
   margin-top: 0.5rem;
 }
 
+.loading-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}

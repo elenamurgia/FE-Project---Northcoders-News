@@ -28,9 +28,9 @@ function Header() {
   const isMobile = useMediaQuery({query: '(max-width: 768px)'})
 
   return (
-    <Container fluid className="header-container">
-      <Row className="align-items-center">
-        <Col style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Container fluid className="header-container" style={{ width: '100%', padding: 0 }}>
+      <Row className="align-items-center" style={{ width: '100%', margin: 0 }}>
+        <Col style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
           <a href="/" style={{ textDecoration: "none", color: "#012E40" }}>
             <h1 className="h1" style={{ fontWeight: "bold", margin: '0'}}>
               <strong>NC News</strong>

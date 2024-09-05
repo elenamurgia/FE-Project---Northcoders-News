@@ -12,9 +12,9 @@ function NavBar({ onSelectTopic }) {
         className="navbar-custom"
         expand="xs"
         collapseOnSelect
-        style={{ color: "#F2F2F2" }}
+        style={{ color: "#F2F2F2", width: '100%' }}
       >
-        <Container style={{ backgroundColor: "#012E40", paddingLeft: '0.5rem' }}>
+        <Container fluid style={{ backgroundColor: "#012E40", paddingLeft: '0.5rem' }}>
           <Navbar.Toggle
             aria-controls="navbarNavDropdown"
             style={{ backgroundColor: "#F2F2F2"}}

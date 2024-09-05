@@ -8,7 +8,6 @@ import { useMediaQuery } from 'react-responsive';
 
 function ArticlesList() {
   const { topic } = useParams();
-  const navigate = useNavigate();
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -48,8 +47,6 @@ function ArticlesList() {
     return <p>{error}</p>;
   }
 
-  
-
   return (
     <Container style={{paddingTop: '0'}}>
        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
@@ -64,7 +61,10 @@ function ArticlesList() {
           <Col 
             key={article.article_id} 
             xs={12} 
-            md={4} 
+            s={6}
+            md={4}
+            lg={3}
+            xl={2} 
             className="mb-4"
             style={{ paddingLeft: isMobile ? '15px' : '', paddingRight: isMobile ? '15px' : '' }}
           >
