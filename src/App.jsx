@@ -43,7 +43,7 @@ function App() {
                 path="/articles/:article_id/comments"
                 element={<Comments username={selectedUser} />}
               />
-              <Route path="/" element={<Topics />} />
+              <Route path="/topics" element={<Topics />} />
               <Route path="topics/:topic" element={<ArticlesList />} />
             </Routes>
           </div>
