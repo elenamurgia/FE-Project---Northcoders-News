@@ -14,31 +14,40 @@ function App() {
   const { selectedUser } = useUser();
 
   return (
-    <div className="App">
-      <div className="header-container">
-        <Header />
+    <div style={{
+    display: "flex",
+    flexDirection: "column",
+    minHeight: "100vh",
+    width: "100vw",  
+    overflowX: "hidden",  
+    }}>
+      <Header />
+        <div style={{ 
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "stretch", 
+          width: "100%", 
+          padding: "20px",
+        }}>
+            <NavBar />
+            <Routes>
+              <Route path="/" element={<ArticlesList />} />
+              <Route path="/search/:searchTerm" element={<SearchResults />} />
+              <Route
+                path="/articles/:article_id"
+                element={<Article username={selectedUser} />}
+              />
+              <Route path="/users" element={<Users />} />
+              <Route
+                path="/articles/:article_id/comments"
+                element={<Comments username={selectedUser} />}
+              />
+              <Route path="/" element={<Topics />} />
+              <Route path="topics/:topic" element={<ArticlesList />} />
+            </Routes>
+          </div>
       </div>
-      <div className="navbar-container">
-        <NavBar />
-      </div>
-      <div className="content-container">
-        <Routes>
-          <Route path="/" element={<ArticlesList />} />
-          <Route path="/search/:searchTerm" element={<SearchResults />} />
-          <Route
-            path="/articles/:article_id"
-            element={<Article username={selectedUser} />}
-          />
-          <Route path="/users" element={<Users />} />
-          <Route
-            path="/articles/:article_id/comments"
-            element={<Comments username={selectedUser} />}
-          />
-          <Route path="/" element={<Topics />} />
-          <Route path="topics/:topic" element={<ArticlesList />} />
-        </Routes>
-      </div>
-    </div>
   );
 }
 
