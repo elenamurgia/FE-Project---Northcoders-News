@@ -48,7 +48,7 @@ function ArticlesList() {
   }
 
   return (
-    <Container style={{paddingTop: '0'}}>
+    <Container fluid style={{ width: "100%", padding: "0", margin: "0" }}>
        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
         <h2 style={{ color: "#012E40", fontWeight: "bold", margin: 0 }}>
           Articles {topic && `- ${topic}`}
