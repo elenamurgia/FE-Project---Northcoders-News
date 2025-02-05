@@ -19,7 +19,8 @@ function App() {
     flexDirection: "column",
     minHeight: "100vh",
     width: "100vw",  
-    overflowX: "hidden",  
+    overflowX: "hidden", 
+    backgroundColor: "#f2f2f2",
     }}>
       <Header />
         <div style={{ 
