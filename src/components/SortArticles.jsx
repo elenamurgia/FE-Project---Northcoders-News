@@ -1,11 +1,8 @@
 import { useNavigate, createSearchParams } from "react-router-dom";
 import { ButtonGroup, Dropdown, Button } from "react-bootstrap";
-import { useMediaQuery } from 'react-responsive';
 
 function SortArticles() {
   const navigate = useNavigate();
-  
-  const isMobile = useMediaQuery({ query: '(max-width: 600px)' });
 
   const handleSortClick = (sortBy, order) => {
     navigate({
@@ -19,15 +16,14 @@ function SortArticles() {
   return (
     <Dropdown 
     as={ButtonGroup} 
-      className={isMobile ? "d-flex justify-content-end w-50" : "float-end"} 
+      className="float-md-end mt-2"
       style={{ 
-        width: isMobile ? 'auto' : 'auto',
         textAlign: 'right',
-        marginBottom: isMobile ? '10px' : '0'
       }}>
       <Button
         variant="secondary"
         size="sm"
+        margin="1rem"
         style={{
           backgroundColor: "#012E40",
           color: "#F2F2F2",
