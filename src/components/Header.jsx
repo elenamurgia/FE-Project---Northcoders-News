@@ -9,7 +9,6 @@ import {
   Col,
 } from "react-bootstrap";
 import { Search } from "react-bootstrap-icons";
-import { useMediaQuery } from "react-responsive";
 
 function Header() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -25,8 +24,6 @@ function Header() {
     }
   };
 
-  const isMobile = useMediaQuery({query: '(max-width: 768px)'})
-
   return (
     <Container fluid className="header-container" style={{ width: '100%', padding: 0 }}>
       <Row className="align-items-center" style={{ width: '100%', margin: 0 }}>
@@ -36,36 +33,33 @@ function Header() {
               <strong>NC News</strong>
             </h1>
           </a>
-          {isMobile && (
-            <>
-              {isSearchActive ? (
-                <Form className="d-flex" onSubmit={handleSearch} style={{ marginLeft: '10px', flexGrow: 1 }}>
-                  <FormControl
-                    type="search"
-                    placeholder="Search NC News..."
-                    className="mr-2"
-                    aria-label="Search"
-                    value={searchTerm}
-                    onChange={(event) => setSearchTerm(event.target.value)}
-                  />
-                  <Button variant="outline-secondary" type="submit">
-                    <Search />
-                  </Button>
-                </Form>
-              ) : (
-                <Button 
-                  variant="link" 
-                  style={{ padding: '0 10px', color: '#012E40' }}
-                  onClick={() => setIsSearchActive(true)}
-                >
+          <div className="d-md-none">
+            {isSearchActive ? (
+              <Form className="d-flex" onSubmit={handleSearch} style={{ marginLeft: '10px', flexGrow: 1 }}>
+                <FormControl
+                  type="search"
+                  placeholder="Search NC News..."
+                  className="mr-2"
+                  aria-label="Search"
+                  value={searchTerm}
+                  onChange={(event) => setSearchTerm(event.target.value)}
+                />
+                <Button variant="outline-secondary" type="submit">
                   <Search />
                 </Button>
-              )}
-            </>
-          )}
+              </Form>
+            ) : (
+              <Button 
+                variant="link" 
+                style={{ padding: '0 10px', color: '#012E40' }}  
+                onClick={() => setIsSearchActive(true)}
+              >
+                <Search />
+              </Button>
+            )}
+          </div>
         </Col>
-        {!isMobile && (
-          <Col md="auto">
+          <Col md="auto" className="d-none d-md-block">
             <Form className="d-flex" onSubmit={handleSearch}>
               <FormControl
                 type="search"
@@ -80,7 +74,6 @@ function Header() {
               </Button>
             </Form>
           </Col>
-        )}
       </Row>
     </Container>
   );
