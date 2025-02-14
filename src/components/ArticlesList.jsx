@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { useParams, useSearchParams, useNavigate } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { getArticles } from "../utils/api.js";
 import { Row, Container, Col, Spinner } from "react-bootstrap";
 import ArticleCard from "./ArticleCard.jsx";
 import SortArticles from "./SortArticles.jsx";
-import { useMediaQuery } from 'react-responsive';
 
 function ArticlesList() {
   const { topic } = useParams();
@@ -14,8 +13,6 @@ function ArticlesList() {
   const [searchParams] = useSearchParams();
   const sortBy = searchParams.get("sort_by");
   const order = searchParams.get("order");
-
-  const isMobile = useMediaQuery({ query: '(max-width: 600px)' });
 
   useEffect(() => {
     setIsLoading(true);
@@ -66,7 +63,6 @@ function ArticlesList() {
             lg={3}
             xl={2} 
             className="mb-4"
-            style={{ paddingLeft: isMobile ? '15px' : '', paddingRight: isMobile ? '15px' : '' }}
           >
             <ArticleCard
               title={article.title}
